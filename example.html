@@ -1,7 +1,10 @@
 <title>checkbox example</title>
 <script>
   var CheckBox = require('./')
-  var App = require('app')
-  var app = new App(true, CheckBox)
+  var App = require('mana/app')
+  var JSX = require('mana').JSX
+  var app = new App(true, function(cursor){
+    return JSX('body', {}, JSX(CheckBox, {cursor: cursor}))
+  })
   app.atom.addListener(console.log.bind(console))
 </script>

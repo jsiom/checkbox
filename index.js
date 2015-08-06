@@ -1,25 +1,14 @@
-var VirtualNode = require('create/node')
+const {JSX} = require('mana')
 
-function Checkbox(cursor){
-  if (!(this instanceof Checkbox)) return new Checkbox(cursor)
-  this.cursor = cursor
-  this.properties = {
-    checked: cursor.value,
-    className: 'toggle',
-    type: 'checkbox'
-  }
-}
+const Checkbox = params =>
+  <input type='checkbox'
+         checked={params.cursor.value}
+         onClick={toggle}
+         {...params}/>
 
-Checkbox.prototype = Object.create(VirtualNode.prototype, {
-  constructor: {value: Checkbox},
-  tagName: {value: 'input'},
-  events: {value: {click: toggle}}
-})
-
-function toggle(event){
-  this.cursor.update(!this.cursor.value)
+function toggle(event) {
+  this.params.cursor.update(!this.params.checked)
   event.preventDefault()
 }
 
-module.exports = Checkbox
-
+export default Checkbox
